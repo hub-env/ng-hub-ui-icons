@@ -13,6 +13,8 @@ Parte del ecosistema [ng-hub-ui](https://hubui.dev/en/).
 
 Documentación completa: **[hubui.dev/en/icons/overview/](https://hubui.dev/en/icons/overview/)** · Ejemplos interactivos: **[hubui.dev/en/icons/examples/](https://hubui.dev/en/icons/examples/)**
 
+Incidencias, roadmap y guía para contribuir: **[github.com/hub-env/hub-ui](https://github.com/hub-env/hub-ui)**
+
 ## 🚀 Inicio rápido
 
 ### 1. Instalación

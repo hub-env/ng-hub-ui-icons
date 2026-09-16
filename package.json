@@ -6,10 +6,10 @@
 	"author": "Carlos Morcillo <carlos.morcillo@me.com> (https://www.carlosmorcillo.com)",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/carlos-morcillo/ng-hub-ui-icons.git"
+		"url": "git+https://github.com/hub-env/ng-hub-ui-icons.git"
 	},
 	"bugs": {
-		"url": "https://github.com/carlos-morcillo/ng-hub-ui-icons/issues",
+		"url": "https://github.com/hub-env/hub-ui/issues",
 		"email": "carlos.morcillo@me.com"
 	},
 	"homepage": "https://hubui.dev/en/icons/overview/",
