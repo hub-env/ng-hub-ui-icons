@@ -2,6 +2,9 @@ import { Directive, effect, ElementRef, ErrorHandler, inject, input } from '@ang
 import { HubIconClassesSpec } from '../models/icon-render-spec';
 import { HubIconRegistry } from '../services/icon-registry.service';
 
+/** Namespace every SVG node has to be created in to render at all. */
+const SVG_NAMESPACE = 'http://www.w3.org/2000/svg';
+
 /**
  * Decorates a host element (`<i>`, `<span>`…) so it renders an icon from any
  * registered pack — the directive form of {@link HubIconComponent}. Use it when
@@ -106,12 +109,32 @@ export class HubIconDirective {
 				case 'svg':
 					el.innerHTML = spec.svg;
 					break;
-				case 'use':
-					el.innerHTML = `<svg class="hub-icon__svg" focusable="false" aria-hidden="true"><use href="${spec.href}"></use></svg>`;
+				case 'use': {
+					// Built as nodes rather than interpolated into markup: `href` is
+					// composed from the icon name, which a consumer may well take from
+					// its own data, and a quote in that string would otherwise escape
+					// the attribute and land arbitrary markup in the host.
+					const doc = el.ownerDocument;
+					const svg = doc.createElementNS(SVG_NAMESPACE, 'svg');
+					svg.setAttribute('class', 'hub-icon__svg');
+					svg.setAttribute('focusable', 'false');
+					svg.setAttribute('aria-hidden', 'true');
+					const use = doc.createElementNS(SVG_NAMESPACE, 'use');
+					use.setAttribute('href', spec.href);
+					svg.appendChild(use);
+					el.textContent = '';
+					el.appendChild(svg);
 					break;
-				case 'img':
-					el.innerHTML = `<img class="hub-icon__img" src="${spec.src}" alt="${spec.alt ?? ''}" />`;
+				}
+				case 'img': {
+					const img = el.ownerDocument.createElement('img');
+					img.setAttribute('class', 'hub-icon__img');
+					img.setAttribute('src', spec.src);
+					img.setAttribute('alt', spec.alt ?? '');
+					el.textContent = '';
+					el.appendChild(img);
 					break;
+				}
 			}
 		});
 	}

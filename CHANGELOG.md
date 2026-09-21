@@ -5,6 +5,16 @@ All notable changes to `ng-hub-ui-icons` are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [22.3.3] - 2026-09-21
+
+### Fixed
+
+- **`[hubIcon]` builds its sprite and image nodes instead of interpolating markup.** The `use` and
+  `img` render kinds were assembled as an HTML string, so a quote inside the resolved `href`, `src`
+  or `alt` closed the attribute and the rest landed in the host as markup. Packs usually compose
+  those values from the icon name, and an icon name can come from the application's own data, so
+  the values are now set as attributes on nodes created for the purpose.
+
 ## [22.3.2] - 2026-09-16
 
 ### Changed
