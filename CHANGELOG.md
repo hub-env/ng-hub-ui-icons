@@ -5,6 +5,20 @@ All notable changes to `ng-hub-ui-icons` are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [22.4.0] - 2026-09-23
+
+### Changed
+
+- **BREAKING — the Angular floor rises from `17.1.0` to `17.3.0`.** The old range was
+  measured from the source alone, and its published `.d.ts` names `InputSignalWithTransform` or `OutputEmitterRef`, which Angular did not ship until 17.3. An application below the new floor could install this
+  package and then fail to build, with an error that pointed at Angular rather than here; it now
+  gets the peer warning it should always have had. Nothing that worked stops working. See
+  `BREAKING_CHANGES.md`.
+- **The floor is proved by running it now, not only derived.** `npm run floors:matrix` builds a real
+  project pinned to the oldest Angular this package claims, installs it there, typechecks the
+  published types against that version's `@angular/*` and runs that version's linker over the
+  compiled output. It is what found this.
+
 ## [22.3.4] - 2026-09-23
 
 ### Changed
@@ -61,17 +75,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   product the one thing that said "this destroys": the icon meant to be red and the icon meant to
   be amber computed to the same `rgb(33, 37, 41)`.
 
-  It was never only about colour, either — `display: inline-flex` beat `.d-none` the same way, and
-  would have beaten whatever utility anyone wrote next.
+    It was never only about colour, either — `display: inline-flex` beat `.d-none` the same way, and
+    would have beaten whatever utility anyone wrote next.
 
-  Every rule the library lands on the icon element is now written through `:where()`, which matches
-  the same element and contributes **zero** specificity: any declaration a consumer writes — a
-  design-system utility, a class of their own, a plain `hub-icon { … }` rule — outranks the
-  primitive whatever the order, and the fix holds for classes this library will never hear of. It
-  is the same move, for the same reason, that `ng-hub-ui-modal` made in its 22.10.0.
+    Every rule the library lands on the icon element is now written through `:where()`, which matches
+    the same element and contributes **zero** specificity: any declaration a consumer writes — a
+    design-system utility, a class of their own, a plain `hub-icon { … }` rule — outranks the
+    primitive whatever the order, and the fix holds for classes this library will never hear of. It
+    is the same move, for the same reason, that `ng-hub-ui-modal` made in its 22.10.0.
 
-  **Two consequences worth reading before upgrading** — see
-  [`BREAKING_CHANGES.md`](./BREAKING_CHANGES.md).
+    **Two consequences worth reading before upgrading** — see
+    [`BREAKING_CHANGES.md`](./BREAKING_CHANGES.md).
 
 ### Changed
 
@@ -109,8 +123,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   what `<hub-icon>` has done since the first release; the directive had simply been left behind,
   and the two forms disagreeing was half the bug.
 
-  **Breaking for a host carrying its own `role` / `aria-label` / `aria-hidden`** — see
-  [`BREAKING_CHANGES.md`](./BREAKING_CHANGES.md).
+    **Breaking for a host carrying its own `role` / `aria-label` / `aria-hidden`** — see
+    [`BREAKING_CHANGES.md`](./BREAKING_CHANGES.md).
 
 ## [22.1.3] - 2026-09-06
 
